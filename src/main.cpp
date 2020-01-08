@@ -1,9 +1,14 @@
 #include <Arduino.h>
+#include <MIDI.h>
+
+MIDI_CREATE_DEFAULT_INSTANCE();
+
+#define MIDI_CHANNEL 4
 
 void setup() {
-  // put your setup code here, to run once:
+  MIDI.begin(MIDI_CHANNEL);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+
 }
