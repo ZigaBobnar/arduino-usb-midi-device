@@ -43,17 +43,33 @@ void loop() {
 
       if (readout == HIGH) {
         if (previous_states[map_index] == false) {
-          // Send note on
+          send_note_on(key_to_midi_map[map_index]);
         }
       } else {
         if (previous_states[map_index] == true) {
-          // Send note off
+          send_note_off(key_to_midi_map[map_index]);
         }
       }
+
+      previous_states[map_index] = readout == HIGH;
     }
 
     digitalWrite(cols_pins[i], LOW);
   }
 
   delay(100);
+}
+
+void send_note_on(int pitch) {
+  send_midi(0x91, pitch, midi_velocity);
+}
+
+void send_note_off(int pitch) {
+  send_midi(0x91, pitch, 0);
+}
+
+void send_midi(int command, int pitch, int velocity) {
+  Serial.write(command);
+  Serial.write(pitch);
+  Serial.write(velocity);
 }
