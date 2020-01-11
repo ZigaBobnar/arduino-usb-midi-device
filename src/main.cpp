@@ -1,8 +1,12 @@
 #include <Arduino.h>
-#include <MIDI.h>
+// #include <MIDI.h>
 
-MIDI_CREATE_DEFAULT_INSTANCE();
+// MIDI_CREATE_DEFAULT_INSTANCE();
 
+void send_note_on(int pitch);
+void send_note_off(int pitch);
+void send_midi(int command, int pitch, int velocity);
+  
 const int midi_channel = 4;
 const int midi_velocity = 127;
 
@@ -19,7 +23,7 @@ const int key_to_midi_map[cols_count * rows_count] = {
 boolean previous_states[cols_count * rows_count] = { 0 };
 
 void setup() {
-  MIDI.begin(midi_channel);
+  // MIDI.begin(midi_channel);
 
   Serial.begin(9600);
 
